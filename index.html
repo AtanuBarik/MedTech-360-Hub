@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>MedTech 360 Hub</title>
+<style>
+:root{
+  --bg:#07111f;--panel:#0d1a2b;--panel2:#10243a;--line:#203953;--text:#eef6ff;--muted:#9db1c8;
+  --accent:#36d0b4;--accent2:#58a6ff;--warn:#ffc857;--danger:#ff7b7b;--ok:#7be495;
+  --shadow:0 20px 60px rgba(0,0,0,.28)
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top right,#17365c 0,#07111f 34%,#050b13 100%);color:var(--text);min-height:100vh}
+button,input,select{font:inherit}.hidden{display:none!important}
+.shell{max-width:1500px;margin:auto;padding:24px}.brand{display:flex;align-items:center;gap:14px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:900;color:#052033}.brand h1{font-size:20px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.card{background:linear-gradient(180deg,rgba(17,36,58,.96),rgba(11,24,39,.96));border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.step{max-width:980px;margin:8vh auto;padding:36px}.step h2{font-size:34px;margin:0 0 10px}.step .sub{color:var(--muted);margin:0 0 28px;line-height:1.55}
+.grid{display:grid;gap:16px}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.choice{border:1px solid var(--line);border-radius:18px;padding:18px;background:#0b1828;cursor:pointer;transition:.2s}.choice:hover,.choice.selected{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 32px rgba(54,208,180,.12)}.choice b{display:block;margin-bottom:6px}.choice span{color:var(--muted);font-size:13px;line-height:1.4}
+.btn{border:0;border-radius:13px;padding:12px 16px;background:linear-gradient(135deg,var(--accent),#6bd9ff);color:#062033;font-weight:800;cursor:pointer}.btn.alt{background:#13263d;color:var(--text);border:1px solid var(--line)}.actions{display:flex;gap:10px;margin-top:24px;justify-content:flex-end}
+.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:12px;color:var(--muted)}.field input{background:#071522;border:1px solid var(--line);border-radius:12px;padding:13px;color:var(--text)}
+.login-tabs{display:flex;gap:8px;margin:20px 0}.tabbtn{padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:#0b1828;color:var(--text);cursor:pointer}.tabbtn.active{border-color:var(--accent);background:#0e2730}
+.sso{padding:20px;border:1px dashed #31516f;border-radius:16px;background:#0a1725}.sso small{color:var(--muted)}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.context{display:flex;gap:10px;flex-wrap:wrap}.pill{padding:8px 11px;border-radius:999px;background:#10243a;border:1px solid var(--line);color:#bfd0e3;font-size:12px}
+.dashboard{display:grid;grid-template-columns:270px 1fr 330px;gap:18px}.sidebar,.chat{padding:18px;min-height:calc(100vh - 115px)}.main{display:grid;gap:18px}
+.navtitle{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.11em;margin:12px 8px}.navitem{padding:11px 12px;border-radius:12px;color:#c8d7e7;cursor:pointer;margin-bottom:5px;font-size:13px}.navitem:hover,.navitem.active{background:#122942;color:white}
+.hero{padding:24px;display:grid;grid-template-columns:1.35fr .65fr;gap:20px}.hero h2{font-size:29px;margin:0 0 8px}.hero p{margin:0;color:var(--muted);line-height:1.55}.signalbox{background:#091827;border:1px solid var(--line);border-radius:16px;padding:16px}.signalbox .big{font-size:28px;font-weight:900}.signalbox small{color:var(--muted)}
+.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.kpi{padding:18px}.kpi label{font-size:12px;color:var(--muted)}.kpi b{display:block;font-size:25px;margin:10px 0 4px}.kpi small{color:var(--muted)}
+.module{padding:20px}.module h3{margin:0 0 12px}.workstreams{grid-template-columns:repeat(5,minmax(0,1fr))}.ws{padding:16px;min-height:170px}.ws h4{margin:0 0 10px;font-size:14px}.ws ul{padding-left:17px;margin:0;color:#b7c8da;font-size:12px;line-height:1.55}.tag{display:inline-block;margin-top:12px;font-size:10px;padding:5px 8px;border-radius:999px;background:#17344e;color:#a9d8ff}
+.chart{height:180px;display:flex;align-items:flex-end;gap:10px;padding:12px 8px 0}.bar{flex:1;background:linear-gradient(180deg,var(--accent2),var(--accent));border-radius:10px 10px 4px 4px;position:relative;min-width:18px}.bar span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:10px;color:#cce6ff}.bar label{position:absolute;bottom:-26px;left:50%;transform:translateX(-50%) rotate(-25deg);font-size:9px;color:var(--muted);white-space:nowrap}
+.list{display:grid;gap:10px}.item{padding:13px;border-radius:14px;background:#0a1828;border:1px solid #19334c}.item b{font-size:13px}.item p{font-size:12px;color:var(--muted);line-height:1.5;margin:5px 0 0}.src{font-size:10px;color:#78b9ff;margin-top:6px}
+.chat h3{margin:0 0 5px}.chat .persona{color:var(--accent);font-size:12px;margin-bottom:14px}.chatlog{display:grid;gap:10px;max-height:58vh;overflow:auto}.bubble{padding:11px 12px;border-radius:14px;font-size:12px;line-height:1.5}.bot{background:#10243a}.user{background:#0c2a2b;border:1px solid #1c5550}.composer{display:flex;gap:8px;margin-top:12px}.composer input{min-width:0;flex:1;background:#071522;border:1px solid var(--line);color:var(--text);padding:11px;border-radius:12px}
+.notice{font-size:11px;color:var(--warn);line-height:1.45;margin-top:12px}
+@media(max-width:1180px){.dashboard{grid-template-columns:220px 1fr}.chat{grid-column:1/-1;min-height:auto}.workstreams{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.shell{padding:12px}.step{margin:2vh auto;padding:20px}.grid2,.grid3,.hero,.dashboard,.workstreams,.kpis{grid-template-columns:1fr}.sidebar{min-height:auto}.hero{padding:18px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div id="auth" class="card step">
+    <div class="brand"><div class="logo">M360</div><div><h1>MedTech 360 Hub</h1><p>Role-aware intelligence for MedTech decision makers</p></div></div>
+    <h2 style="margin-top:32px">Secure access</h2><p class="sub">Choose enterprise SSO or the demo username-password experience. Production SSO requires connection to your identity provider.</p>
+    <div class="login-tabs"><button class="tabbtn active" onclick="showLogin('sso',this)">Enterprise SSO</button><button class="tabbtn" onclick="showLogin('pwd',this)">Username & password</button></div>
+    <div id="sso" class="sso"><b>Continue with enterprise identity</b><p style="color:var(--muted);font-size:13px">Designed for Microsoft Entra ID, Okta, or Google Cloud Identity.</p><button class="btn" onclick="go('role')">Continue with SSO</button><div><small>Prototype only — no production authentication is implemented.</small></div></div>
+    <div id="pwd" class="hidden"><div class="field"><label>Work email</label><input placeholder="name@company.com"/></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"/></div><div class="actions"><button class="btn" onclick="go('role')">Sign in</button></div></div>
+  </div>
+
+  <div id="role" class="card step hidden"><h2>Select your role</h2><p class="sub">Your dashboard, prompts, signals, KPIs, and content hierarchy will adapt to the priorities of your function.</p><div class="grid grid2" id="roles"></div><div class="actions"><button class="btn alt" onclick="go('auth')">Back</button><button class="btn" onclick="nextFrom('role','domain')">Continue</button></div></div>
+  <div id="domain" class="card step hidden"><h2>Select a MedTech domain</h2><p class="sub">Domain selection determines the market context, source signals, competitor lens, and recommended dashboard modules.</p><div class="grid grid2" id="domains"></div><div class="actions"><button class="btn alt" onclick="go('role')">Back</button><button class="btn" onclick="nextFrom('domain','access')">Continue</button></div></div>
+  <div id="access" class="card step hidden"><h2>Choose access mode</h2><p class="sub">This demo uses the selection to shape available controls and collaboration cues.</p><div class="grid grid3" id="accesses"></div><div class="actions"><button class="btn alt" onclick="go('domain')">Back</button><button class="btn" onclick="launch()">Open dashboard</button></div></div>
+
+  <div id="app" class="hidden">
+    <div class="topbar">
+      <div class="brand"><div class="logo">M360</div><div><h1>MedTech 360 Hub</h1><p>Intelligence • Insights • Strategy • Commercial • Growth</p></div></div>
+      <div class="context"><span class="pill" id="ctxRole"></span><span class="pill" id="ctxDomain"></span><span class="pill" id="ctxAccess"></span><button class="btn alt" onclick="go('role')">Change context</button></div>
+    </div>
+    <div class="dashboard">
+      <aside class="card sidebar">
+        <div class="navtitle">Workspace</div>
+        <div class="navitem active">Executive snapshot</div>
+        <div class="navitem">Market & competitors</div><div class="navitem">Customer & clinical insights</div><div class="navitem">Product & innovation</div><div class="navitem">Pricing & commercial</div><div class="navitem">Growth & portfolio</div>
+        <div class="navtitle">Decision tools</div><div class="navitem">Signals & alerts</div><div class="navitem">Benchmarking</div><div class="navitem">Opportunity explorer</div><div class="navitem">Partner / target radar</div><div class="navitem">Research library</div>
+      </aside>
+      <main class="main">
+        <section class="card hero"><div><h2 id="heroTitle"></h2><p id="heroText"></p><div style="margin-top:16px"><span class="tag">Role-personalized</span> <span class="tag">Domain-aware</span> <span class="tag">Decision-oriented</span></div></div><div class="signalbox"><small>Current strategic lens</small><div class="big" id="lens"></div><small id="lensSub"></small></div></section>
+        <section class="grid kpis" id="kpis"></section>
+        <section class="card module"><h3>Role-specific intelligence architecture</h3><div class="grid workstreams" id="workstreams"></div></section>
+        <section class="grid grid2">
+          <div class="card module"><h3>Domain opportunity pulse</h3><div class="chart" id="chart"></div><p class="notice">Illustrative index for demo visualization; replace with project-specific sourced metrics before client use.</p></div>
+          <div class="card module"><h3>Priority signals</h3><div class="list" id="signals"></div></div>
+        </section>
+        <section class="card module"><h3>Research & evidence layer</h3><div class="list" id="sources"></div></section>
+      </main>
+      <aside class="card chat"><h3>MedTech 360 Copilot</h3><div class="persona" id="chatPersona"></div><div class="chatlog" id="chatlog"><div class="bubble bot">Ask me about this dashboard. I’ll frame answers for your selected role and domain, using the prototype’s research and clearly flagging illustrative demo values.</div></div><div class="composer"><input id="q" placeholder="Ask a strategic question..."/><button class="btn" onclick="ask()">Ask</button></div><div class="notice">Prototype chatbot: response logic is local and demonstrative. Connect to an approved enterprise LLM/RAG backend for production.</div></aside>
+    </div>
+  </div>
+</div>
+
+<script>
+const state={role:null,domain:null,access:null};
+const roles=[
+["Executive Leadership Team","Enterprise outlook, strategic signals, portfolio health, investment priorities and risks."],
+["Product & Portfolio Management Team","Market opportunity, competitor portfolios, VOC, feature strategy and product roadmap."],
+["Marketing, Branding & Commercial Excellence Team","Positioning, messaging, segmentation, pricing, reimbursement intelligence, GTM and sales excellence."],
+["Strategy & Business Development Team","Market entry, partnerships, M&A, commercial diligence, adjacency and scenario planning."],
+["Medical & Clinical Affairs / R&D & Innovation Team","Disease landscape, clinical workflow, KOL insights, product requirements and innovation priorities."]
+];
+const domains=[
+["Immunodiagnostics","Autoimmunity & Allergy"],
+["Diabetes Monitoring & Blood Glucose Monitoring","CGM, BGM, connected monitoring and patient workflows"],
+["Eye Health","Ophthalmology & Optometry"],
+["Orthopedics & Sports Medicine","Joint reconstruction, sports medicine, trauma and enabling technologies"],
+["Advanced Wound Management","NPWT, dressings, skin substitutes and wound-care workflows"],
+["Clinical Laboratory Services","Testing networks, diagnostics, lab operations and digital services"]
+];
+const access=[["Hub Owner","Manage workspace configuration, content and collaboration."],["Contributor","Add research, insights, annotations and project materials."],["Viewer","Consume intelligence, dashboards and approved outputs."]];
+const roleModules={
+"Executive Leadership Team":[
+["Executive Market Outlook",["Market size, growth & forecast","Segment/geography evolution","Strategic signals & trend radar","Risk & opportunity dashboard"]],
+["Customer & Clinical Pulse",["Major needs & pain points","Expert perspectives","Workflow trends","Survey highlights & unmet needs"]],
+["Portfolio & Innovation",["Portfolio health","Differentiation & gaps","Innovation priorities","Pipeline / roadmap view"]],
+["Commercial Performance",["Priority segments & channels","Pricing pressure & premium opportunities","Reimbursement signals","Launch/adoption tracking"]],
+["Growth & Corporate Strategy",["Growth priorities","Invest / maintain / rationalize","Partnership & M&A pipeline","Scenario and investment prioritization"]]
+],
+"Product & Portfolio Management Team":[
+["Market & Product Landscape",["Opportunity sizing","Category & technology landscape","Competitor portfolio intelligence","Product benchmarking"]],
+["VOC & Research",["Needs and switching drivers","Customer segmentation","Workflow & journey","Concept / feature / usability research"]],
+["Product Strategy",["Target use cases","Positioning & reasons to believe","Feature strategy","Roadmap & portfolio architecture"]],
+["Commercial Feasibility",["Competitive pricing","WTP / price-feature trade-offs","Launch readiness","Packaging & bundling"]],
+["Portfolio Growth",["Gap analysis","New product opportunities","Adjacency assessment","Build / buy / partner"]]
+],
+"Marketing, Branding & Commercial Excellence Team":[
+["Market & Brand Intelligence",["Customer / market landscape","Competitive positioning","Messaging & claims benchmarking","Share of voice & channel landscape"]],
+["Customer & Brand Insights",["Segmentation & personas","VOC & customer journey","Brand research","Message / concept testing"]],
+["Positioning & Experience",["Positioning strategy","Value proposition","Messaging architecture","Customer experience strategy"]],
+["Pricing & Commercial Excellence",["Pricing strategy support","Reimbursement intelligence","GTM & channel strategy","Sales enablement & key accounts"]],
+["Commercial Growth",["Growth segments & channels","Brand expansion","Geographic readiness","Investment prioritization & roadmap"]]
+],
+"Strategy & Business Development Team":[
+["Market & Ecosystem",["Market & competitive landscape","Industry / ecosystem mapping","Value chain assessment","Startup & strategic signal monitoring"]],
+["Future Demand & Unmet Need",["Unmet need assessment","Customer transformation","Future workflow / care environment","Adoption drivers & barriers"]],
+["Capability & Strategic Fit",["Capability assessment","Portfolio/product fit","Innovation opportunity","Build / buy / partner"]],
+["Commercial Models & Diligence",["Pricing / commercial benchmarking","Revenue models","Channel models","Commercial due diligence"]],
+["Growth, M&A & Partnerships",["Growth & market entry","Portfolio strategy","Target screening","Partnership strategy & synergy assessment"]]
+],
+"Medical & Clinical Affairs / R&D & Innovation Team":[
+["Clinical & Scientific Landscape",["Disease / condition landscape","Diagnostic / treatment pathways","Guidelines & practice trends","Scientific / publication scan"]],
+["Clinical & Customer Research",["KOL / HCP interviews","Workflow & patient journey","Clinical unmet needs","Usability & survey research"]],
+["Product & R&D Strategy",["Clinical product requirements","Concept assessment","Clinical differentiation","Feature prioritization"]],
+["Adoption & Value Evidence",["Clinical/customer value story","Adoption barriers","Reimbursement awareness","Education & launch research"]],
+["Innovation & Future Practice",["New use-case assessment","Clinical adjacencies","Technology scouting","R&D / innovation roadmap inputs"]]
+]};
+
+const domainResearch={
+"Immunodiagnostics":[
+["Regulatory lens","FDA regulates in vitro diagnostic products, providing the core U.S. framework for tests used in disease detection and related clinical decisions.","FDA"],
+["Customer lens","Allergy and autoimmune testing decisions depend heavily on clinical context, assay performance, workflow integration, and guideline-aligned interpretation.","Public clinical practice sources"],
+["Opportunity lens","Connected lab workflows, assay menu breadth, automation, decision support and differentiated evidence are strong dashboard themes.","Research synthesis"]
+],
+"Diabetes Monitoring & Blood Glucose Monitoring":[
+["Regulatory signal","FDA authorized the first over-the-counter continuous glucose monitor in 2024, broadening access beyond prescription-only pathways.","FDA"],
+["Population signal","CDC’s 2026 National Diabetes Statistics Report provides current U.S. diabetes burden and surveillance context.","CDC"],
+["Opportunity lens","OTC CGM, interoperability, adherence, insights, affordability and channel strategy are central market themes.","Research synthesis"]
+],
+"Eye Health":[
+["Disease surveillance","The National Eye Institute provides data and statistics across major eye conditions and vision impairment.","NEI"],
+["Care model lens","Ophthalmology and optometry span disease management, imaging, diagnostics, vision correction and longitudinal monitoring.","Public health & clinical sources"],
+["Opportunity lens","Imaging AI, remote monitoring, workflow efficiency and earlier detection are important innovation themes.","Research synthesis"]
+],
+"Orthopedics & Sports Medicine":[
+["Registry signal","AAOS publishes American Joint Replacement Registry reporting that supports evidence on arthroplasty practice and outcomes.","AAOS"],
+["Technology lens","Robotics, navigation, digital planning and patient-specific workflows increasingly shape competitive differentiation.","Research synthesis"],
+["Opportunity lens","Portfolio breadth, enabling technology, surgeon workflow and ASC migration are strong strategy themes.","Research synthesis"]
+],
+"Advanced Wound Management":[
+["Policy signal","CMS finalized major 2026 payment policy changes for skin substitutes under the Physician Fee Schedule.","CMS"],
+["Workflow lens","Wound care spans advanced dressings, NPWT, biologic/skin substitute products, offloading, monitoring and multidisciplinary care.","Public clinical sources"],
+["Opportunity lens","Evidence differentiation, site-of-care economics, reimbursement changes and digital wound assessment deserve active monitoring.","Research synthesis"]
+],
+"Clinical Laboratory Services":[
+["Payment framework","CMS maintains the Clinical Laboratory Fee Schedule as a central U.S. Medicare payment framework for clinical diagnostic laboratory tests.","CMS"],
+["Operating lens","Lab services compete on test menu, access, logistics, TAT, connectivity, analytics and customer experience.","Industry synthesis"],
+["Opportunity lens","Advanced diagnostics, digital ordering/results, AI-enabled decision support and lab stewardship are key strategic themes.","Research synthesis"]
+]
+};
+
+function mountChoices(id,data,key){const el=document.getElementById(id);el.innerHTML=data.map((x,i)=>`<div class="choice" onclick="selectChoice('${key}',${i},this)"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}
+mountChoices("roles",roles,"role");mountChoices("domains",domains,"domain");mountChoices("accesses",access,"access");
+function selectChoice(key,i,el){state[key]=({role:roles,domain:domains,access:access}[key])[i][0];[...el.parentElement.children].forEach(x=>x.classList.remove("selected"));el.classList.add("selected")}
+function showLogin(id,btn){document.getElementById("sso").classList.toggle("hidden",id!=="sso");document.getElementById("pwd").classList.toggle("hidden",id!=="pwd");document.querySelectorAll(".tabbtn").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
+function go(id){["auth","role","domain","access","app"].forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden")}
+function nextFrom(key,to){if(!state[key]){alert("Please make a selection.");return}go(to)}
+function launch(){if(!state.access){alert("Please choose an access mode.");return}render();go("app")}
+function render(){
+ document.getElementById("ctxRole").textContent=state.role;document.getElementById("ctxDomain").textContent=state.domain;document.getElementById("ctxAccess").textContent=state.access;
+ document.getElementById("heroTitle").textContent=state.domain+" intelligence for "+state.role;
+ const rdesc=roles.find(x=>x[0]===state.role)[1];document.getElementById("heroText").textContent=rdesc+" The workspace prioritizes insights that can be consumed and acted upon without exposing irrelevant functional detail.";
+ const lensMap={"Executive Leadership Team":["Strategic clarity","Enterprise risk, opportunity and investment priorities"],"Product & Portfolio Management Team":["Portfolio choices","Evidence-led product, feature and roadmap decisions"],"Marketing, Branding & Commercial Excellence Team":["Commercial impact","Positioning, price, channel and account action"],"Strategy & Business Development Team":["Growth options","Markets, partnerships, M&A and strategic fit"],"Medical & Clinical Affairs / R&D & Innovation Team":["Clinical innovation","Unmet needs, evidence and future product requirements"]};
+ document.getElementById("lens").textContent=lensMap[state.role][0];document.getElementById("lensSub").textContent=lensMap[state.role][1];
+ document.getElementById("chatPersona").textContent="Operating as: "+state.role+" • "+state.domain;
+ const ks=[["Priority signals","12","Current demo watchlist"],["Research modules","5","Role-specific workstreams"],["Evidence sources","6+","Public-source layer"],["Opportunity index","78/100","Illustrative demo score"]];
+ document.getElementById("kpis").innerHTML=ks.map(k=>`<div class="card kpi"><label>${k[0]}</label><b>${k[1]}</b><small>${k[2]}</small></div>`).join("");
+ document.getElementById("workstreams").innerHTML=roleModules[state.role].map((w,i)=>`<div class="card ws"><h4>${i+1}. ${w[0]}</h4><ul>${w[1].map(x=>`<li>${x}</li>`).join("")}</ul><span class="tag">${i===0?"Secondary + CI":i===1?"Primary + secondary":i===2?"Synthesis":i===3?"Commercial research":"Strategy synthesis"}</span></div>`).join("");
+ const vals=[62,76,69,84,71,79],labs=["Market","Customer","Product","Commercial","Growth","Digital"];
+ document.getElementById("chart").innerHTML=vals.map((v,i)=>`<div class="bar" style="height:${v}%"><span>${v}</span><label>${labs[i]}</label></div>`).join("");
+ const sig=domainResearch[state.domain];document.getElementById("signals").innerHTML=sig.map(s=>`<div class="item"><b>${s[0]}</b><p>${s[1]}</p><div class="src">Source: ${s[2]}</div></div>`).join("");
+ document.getElementById("sources").innerHTML=[
+ `<div class="item"><b>Secondary research layer</b><p>FDA, CDC, CMS, NEI, AAOS and other authoritative public sources feed market, regulatory, clinical, reimbursement and technology signals.</p></div>`,
+ `<div class="item"><b>Primary research layer</b><p>Expert interviews, customer interviews, KOL discussions and surveys feed needs, workflow, perception, adoption, preference, concept and value insights.</p></div>`,
+ `<div class="item"><b>Demo-data governance</b><p>Indices and unsourced numeric dashboard values are explicitly illustrative. Production deployment should attach source lineage, project/date metadata and confidence.</p></div>`
+ ].join("");
+}
+function ask(){
+ const q=document.getElementById("q");if(!q.value.trim())return;const log=document.getElementById("chatlog");log.innerHTML+=`<div class="bubble user">${q.value.replace(/</g,"&lt;")}</div>`;
+ let ans="For "+state.role+", I would frame this around ";
+ if(state.role.includes("Executive")) ans+="enterprise implications, key risks, opportunity magnitude, portfolio choices and decisions requiring leadership attention.";
+ else if(state.role.includes("Product")) ans+="market need, competitor product gaps, customer evidence, feature trade-offs and roadmap implications.";
+ else if(state.role.includes("Marketing")) ans+="segment needs, positioning, message proof points, price/reimbursement signals, channels and commercial action.";
+ else if(state.role.includes("Strategy")) ans+="market attractiveness, ecosystem structure, partner/M&A options, strategic fit, diligence risks and growth scenarios.";
+ else ans+="clinical need, workflow, evidence, HCP/KOL perspectives, adoption barriers and R&D implications.";
+ ans+=" I would keep the analysis specific to "+state.domain+" and distinguish sourced facts from illustrative prototype values.";
+ log.innerHTML+=`<div class="bubble bot">${ans}</div>`;q.value="";log.scrollTop=log.scrollHeight;
+}
+</script>
+</body>
+</html>
